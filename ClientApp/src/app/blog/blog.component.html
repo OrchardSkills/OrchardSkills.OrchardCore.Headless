@@ -10,22 +10,8 @@
 <section style="background-color: #353b43;">
   <div class="wrapper">
     <br>
-    <br>
-
-    <section>
-      <div class="has-text-centered has-text-info has-text-weight-bold is-size-3">
-        <h2 class="has-text-weight-bold wow fadeIn is-uppercase" data-wow-delay="0.2s"
-          style="visibility: visible; animation-name: fadeIn; animation-delay: 0.2s;" data-aos="fade-in"
-          data-aos-delay="300"> OrchardCMS.net <span class="has-text-white">Blog </span>
-          <i style="font-weight: bolder;" class=" tf-ion-android-list"></i>
-        </h2>
-        <!--Excerpt-->
-      </div>
-    </section>
-    <br>
-    <br>
     <div class="columns is-1 is-variable">
-      <div class="column is-8">
+      <div class="column is-12">
         <ng-container *ngFor="let blog of (blogPosts | async)?.blogPost  | paginate: config">
           <div (click)="showMore(blog.path)" class="card block">
             <div class="card-image">
@@ -57,107 +43,8 @@
           </div>
         </ng-container>
         <br>
-
         <pagination-controls [responsive]="responsive" (pageChange)="onPageChange($event)"></pagination-controls>
         <br>
-      </div>
-      <div class="column">
-        <div class="box block">
-          <article class="border-bottom">
-            <p class=" has-text-info has-text-centered is-uppercase has-text-weight-bold">POPULAR POSTS</p>
-          </article>
-          <hr>
-          <article class="media">
-            <div class="media-left">
-              <figure
-                [routerLink]="['/blog/2019-10-16_CICD_%28Continuous_Integration_and_Deployment%29_Angular_on_Netlify']"
-                routerLinkActive="router-link-active" class="image is-64x64">
-                <img src="../../../../assets/blog/popular/netlify.png" alt="Image">
-              </figure>
-            </div>
-            <div [routerLink]="['/blog/2019-10-16_CICD_%28Continuous_Integration_and_Deployment%29_Angular_on_Netlify']"
-              class="media-content">
-              <div class="content ">
-                <p class="light-grey-text">
-                  <strong class="has-text-info">Netlify</strong>
-                </p>
-              </div>
-              <nav class="level is-mobile light-grey-text">
-                <small>10/16/2019</small>
-              </nav>
-            </div>
-          </article>
-          <article class="media">
-            <div class="media-left">
-              <figure [routerLink]="['/blog/2019-10-21_AWS_Toolkit_for_VSCode']" class="image is-64x64">
-                <img src="../../../../assets/blog/popular/AWS-Toolkit-VSCode.png" alt="Image">
-              </figure>
-            </div>
-            <div [routerLink]="['/blog/2019-10-21_AWS_Toolkit_for_VSCode']" class="media-content">
-              <div class="content">
-                <p>
-                  <strong class="has-text-info">AWS Toolkit</strong>
-                </p>
-              </div>
-              <nav class="level is-mobile light-grey-text">
-                <small>10/21/2019</small>
-              </nav>
-            </div>
-          </article>
-          <article class="media">
-            <div class="media-left">
-              <figure [routerLink]="['/blog/2019-10-10_Angular_VSCode_Remote_Development']" class="image is-64x64">
-                <img src="../../../../assets/blog/popular/AngularVSCodeRemoteDevelopment.png" alt="Image">
-              </figure>
-            </div>
-            <div [routerLink]="['/blog/2019-10-10_Angular_VSCode_Remote_Development']" class="media-content">
-              <div class="content">
-                <p>
-                  <strong class="has-text-info">Remote Development</strong>
-                </p>
-              </div>
-              <nav class="level is-mobile light-grey-text">
-                <small>10/10/2019</small>
-              </nav>
-            </div>
-          </article>
-          <article class="media">
-            <div class="media-left">
-              <figure [routerLink]="['/blog/2019-10-15_An_Angular_Reference_PWA_with_SSR_SEO_and_Firebase']"
-                class="image is-64x64">
-                <img src="../../../../assets/blog/popular/Angular-PWA-SSR-SEO-Firebase.png" alt="Image">
-              </figure>
-            </div>
-            <div [routerLink]="['/blog/2019-10-15_An_Angular_Reference_PWA_with_SSR_SEO_and_Firebase']"
-              class="media-content">
-              <div class="content">
-                <p>
-                  <strong class="has-text-info">PWA SSR SEO Firebase</strong>
-                </p>
-              </div>
-              <nav class="level is-mobile light-grey-text">
-                <small>10/15/2019</small>
-              </nav>
-            </div>
-          </article>
-          <article class="media">
-            <div class="media-left">
-              <figure [routerLink]="['/blog/2019-10-22_Angular_Meets_the_Bulma_CSS_Framework']" class="image is-64x64">
-                <img src="../../../../assets/blog/popular/Angular-SEO-Bulma.png" alt="Image">
-              </figure>
-            </div>
-            <div [routerLink]="['/blog/2019-10-22_Angular_Meets_the_Bulma_CSS_Framework']" class="media-content">
-              <div class="content">
-                <p>
-                  <strong class="has-text-info">Bulma</strong>
-                </p>
-              </div>
-              <nav class="level is-mobile light-grey-text">
-                <small>10/22/2019</small>
-              </nav>
-            </div>
-          </article>
-        </div>
       </div>
     </div>
   </div>
