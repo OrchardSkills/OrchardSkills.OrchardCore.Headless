@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using OrchardCore.Modules;
 using OrchardCore.ResourceManagement;
 
-namespace OrchardCore.Themes.TheTheme
+namespace OrchardCore.Themes.TheHeadlessTheme
 {
     public class Startup : StartupBase
     {
