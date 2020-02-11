@@ -1,0 +1,40 @@
+<nav class="navbar background-color-dark-grey" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" aria-label="OrchardCMS.net" rel="noopener" href="https://orchardcms.net/">
+          <img alt="Orchard CMS" src="../../../assets/icons/icon-57x57.png" width="112" height="28">
+          <p class="media-right light-grey-text is-size-4">Orchard<strong class="has-text-info">CMS.net</strong></p>
+        </a>
+  
+        <a (click)="toggleNavbar()" role="button" [ngClass]="{'is-active': isActive}"
+          class="navbar-burger burger has-text-info" aria-label="menu" aria-expanded="false"
+          data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+  
+      <div (click)="toggleNavbar()" [ngClass]="{'is-active': isActive}" id="navbarBasicExample"
+        class="is-success navbar-menu">
+        <div class="navbar-end" style="margin-left: unset;">
+          <a class="navbar-item margin-right  bottom-line-hover" [routerLink]="['/']" routerLinkActive="is-focus"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Home
+          </a>
+  
+          <a class="navbar-item margin-right bottom-line-hover" [routerLink]="['/news']" routerLinkActive="is-focus">
+            News
+          </a>
+  
+          <a class="navbar-item margin-right bottom-line-hover" [routerLink]="['/blog']" routerLinkActive="is-focus">
+            Blog
+          </a>
+          <a class="navbar-item margin-right bottom-line-hover" [routerLink]="['/contact']" routerLinkActive="is-focus">
+            Contact Us
+          </a>
+        </div>
+  
+      </div>
+    </div>
+  </nav>
