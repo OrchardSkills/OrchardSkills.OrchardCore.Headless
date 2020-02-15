@@ -2683,6 +2683,23 @@ export type CurrentBlogQuery = (
   )>>> }
 );
 
+export type SearchQueryQueryVariables = {
+  parameters?: Maybe<Scalars['String']>
+};
+
+
+export type SearchQueryQuery = (
+  { __typename?: 'Query' }
+  & { searchBlogPosts: Maybe<Array<Maybe<(
+    { __typename?: 'BlogPost' }
+    & Pick<BlogPost, 'subtitle' | 'displayText' | 'path'>
+    & { image: Maybe<(
+      { __typename?: 'MediaField' }
+      & Pick<MediaField, 'urls'>
+    )> }
+  )>>> }
+);
+
 export const BlogPostsDocument = gql`
     query BlogPosts {
   blogPost {
@@ -2731,5 +2748,25 @@ export const CurrentBlogDocument = gql`
   })
   export class CurrentBlogGQL extends Apollo.Query<CurrentBlogQuery, CurrentBlogQueryVariables> {
     document = CurrentBlogDocument;
+    
+  }
+export const SearchQueryDocument = gql`
+    query searchQuery($parameters: String) {
+  searchBlogPosts(parameters: $parameters) {
+    subtitle
+    displayText
+    path
+    image {
+      urls
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SearchQueryGQL extends Apollo.Query<SearchQueryQuery, SearchQueryQueryVariables> {
+    document = SearchQueryDocument;
     
   }

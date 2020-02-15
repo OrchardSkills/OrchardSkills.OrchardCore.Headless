@@ -51,6 +51,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "src/assets/fonts/style.css",
               "node_modules/prismjs/themes/prism-okaidia.css",
               "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css"
