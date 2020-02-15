@@ -1,6 +1,10 @@
 {% zone "Header" %}
-    <header>
-        <div class="overlay"></div>
+    {% assign imagePath = Model.ContentItem.Content.Blog.Image.Paths.first %}
+    {% if imagePath == nil %}
+    <header class="masthead" style="background-image: url('{{ "~/TheHeadlessTheme/img/home-bg.jpg" | href }}')">
+    {% else %}
+    <header class="masthead" style="background-image: url('{{ imagePath | asset_url }}')">
+    {% endif %}        <div class="overlay"></div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
