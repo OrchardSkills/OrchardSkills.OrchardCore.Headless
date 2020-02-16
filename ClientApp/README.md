@@ -127,10 +127,22 @@ When true, does not initialize a git repository.
 
 When true, creates a project without any testing frameworks. (Use for learning purposes only.)
 
+#### --inlineTemplate=[true|false]
+
+When true, includes styles inline in the component TS file. By default, an external styles file is created and referenced in the component TS file.
+
+#### --inlineStyle=[true|false]
+
+When true, includes styles inline in the component TS file. By default, an external styles file is created and referenced in the component TS file.
+
+#### --skipTests=[true|false]
+
+When true, does not generate "spec.ts" test files for the new project.
+
 ## ng new
 
 ```
-ng new ClientApp --routing --style=scss --skip-install --skip-git --minimal=true
+ng new ClientApp --routing --style=scss --skip-install --skip-git --skipTests=true
 ```
 
 ## Code scaffolding
