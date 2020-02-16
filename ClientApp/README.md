@@ -150,10 +150,9 @@ ng new ClientApp --routing --style=scss --skip-install --skip-git --skipTests=tr
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ```
-ng generate module blog --routing=true
-ng generate component blog/components/blog -m blog
-ng generate component blog/components/blog-content -m blog
-ng generate component navbar -m core
+ng generate component blog -m app
+ng generate component blog-content -m app
+ng generate component navbar -m app
 ```
 
 ## Project Folder Structure
@@ -796,9 +795,6 @@ export class AppComponent implements OnInit {
 
   constructor() { }
   ngOnInit() {
-
-
-
     AOS.init({
       // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
       offset: 120, // offset (in px) from the original trigger point
@@ -1019,6 +1015,14 @@ export function createApollo(httpLink: HttpLink) {
 export class GraphQLModule {}
 ```
 ## Install GraphQL Code Generator 
+
+### NPM
+
+```
+npm install --save-dev graphql @graphql-codegen/cli
+```
+
+### Yarn
 
 ```
 yarn add -D graphql @graphql-codegen/cli
