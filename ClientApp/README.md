@@ -977,7 +977,177 @@ npm install ngx-pagination --save
 ```
 yarn add ngx-pagination
 ```
+## Add GraphQL to project
 
+### install Apollo GraphQL with Angular Schematics
+
+```
+ng add apollo-angular
+```
+
+### One thing you need to set is the URL of your GraphQL Server, so open 
+
+```
+src/app/graphql.module.ts
+```
+set the url variables
+
+```
+import {NgModule} from '@angular/core';
+import {ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
+import {HttpLinkModule, HttpLink} from 'apollo-angular-link-http';
+import {InMemoryCache} from 'apollo-cache-inmemory';
+
+const uri = 'https://orchardheadless.com/api/graphql'; // <-- add the URL of the GraphQL server here
+export function createApollo(httpLink: HttpLink) {
+  return {
+    link: httpLink.create({uri}),
+    cache: new InMemoryCache(),
+  };
+}
+
+@NgModule({
+  exports: [ApolloModule, HttpLinkModule],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: createApollo,
+      deps: [HttpLink],
+    },
+  ],
+})
+export class GraphQLModule {}
+```
+## Install GraphQL Code Generator 
+
+```
+yarn add -D graphql @graphql-codegen/cli
+```
+
+### GraphQL Code Generator lets you setup everything by simply running the following command:
+```
+yarn run graphql-codegen init
+```
+Question by question, it will guide you through the whole process of setting up a schema, selecting plugins, picking a destination of a generated file and a lot more.
+
+If you don't want to use the wizard, create a basic codegen.yml configuration file, point to your schema, and pick the plugins you wish to use. For example:
+
+```
+overwrite: true
+schema: "https://orchardheadless.com/api/graphql"
+documents: "src/app/graphql/*.graphql"
+generates:
+  src/app/graphql/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-apollo-angular"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
+
+```
+
+### Create GraphQL querys
+
+Create folder graphql and inside of the folder crearte GraphQL querys files
+
+```
+posts.graphql
+```
+
+Inside of posts.graphql create a post query
+
+```
+ query BlogPosts {
+    blogPost {
+        path
+        subtitle
+        displayText
+        owner
+        publishedUtc
+        image {
+          urls
+        }
+        markdownBody {
+          markdown
+        }
+  }
+}
+```
+
+Then, run the code-generator using graphql-codegen that you set in package.json command:
+
+```
+yarn run graphql-codegen
+```
+The command above will fetch the GraphQL schema and create graphql.ts
+
+
+## Lets use graphql.ts in components
+
+inside of blog.components.ts
+```
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, take} from 'rxjs/operators';
+import { BlogPostsGQL, BlogPostsQuery, SearchQueryQuery, SearchQueryGQL, SearchQueryQueryVariables } from '../../../graphql/graphql';
+
+@Component({
+  selector: 'app-blog',
+  templateUrl: './blog.component.html',
+  styleUrls: ['./blog.component.scss']
+})
+export class BlogComponent implements OnInit {
+
+ blogPosts!: Observable<BlogPostsQuery>; => Create blogPosts observable and make it as a type of BlogPostsQuery and import it from graphql.ts
+
+  constructor(
+    private allBlogPostGQL: BlogPostsGQL => inject BlogPostsGQL from graphql.ts
+  ) {
+  }
+
+  ngOnInit() {
+    this.blogPosts =  this.allBlogPostGQL.watch().valueChanges.pipe(map(blogs =>    blogs.data)) => call the query and fetch the data
+  }
+}
+```
+
+Inside of blog.component.html use ngFor to display the data
+
+```
+<ng-container *ngFor="let blog of (blogPosts | async)?.blogPost  | paginate: config">
+          <div (click)="showMore(blog.path)" class="card block">
+            <div class="card-image">
+              <figure style="cursor: pointer;" (click)="showMore(blog.path)" class="image">
+
+                <img class="image" src="https://www.orchardheadless.com/{{blog.mainBlogImage.urls}}"
+                  alt="Placeholder image">
+
+              </figure>
+            </div>
+            <div class="card-content">
+              <p style="cursor: pointer;" (click)="showMore(blog.path)"
+                class="title is-4 has-text-centered has-text-info">{{blog.displayText}}</p>
+              <p style="cursor: pointer;" (click)="showMore(blog.path)"
+                class="subtitle is-6 has-text-centered has-text-white">{{blog.subtitle}}
+              </p>
+              <p class="has-text-info">Posted by <span class="has-text-white">{{blog.owner}}</span> on <time
+                  datetime="2016-1-1">{{blog.publishedUtc  | date}}</time></p>
+              <hr>
+              <div (click)="showMore(blog.path)" style="cursor: pointer;"
+                class="content has-text-centered light-grey-text">
+
+                <button class="button is-link is-rounded">Click here for more info</button>
+                <br>
+
+              </div>
+            </div>
+
+          </div>
+        </ng-container>
+```
 ## .gitignore
 
 Add the following to the .gitignore file.
