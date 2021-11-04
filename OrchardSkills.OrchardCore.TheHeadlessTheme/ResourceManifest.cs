@@ -1,18 +1,25 @@
+using Microsoft.Extensions.Options;
 using OrchardCore.ResourceManagement;
 
 namespace OrchardCore.Themes.TheHeadlessTheme
 {
-    public class ResourceManifest : IResourceManifestProvider
+    public class ResourceManagementOptionsConfiguration : IConfigureOptions<ResourceManagementOptions>
     {
-        public void BuildManifests(IResourceManifestBuilder builder)
+        private static readonly ResourceManifest manifest;
+
+        static ResourceManagementOptionsConfiguration()
         {
-            var manifest = builder.Add();
+            manifest = new ResourceManifest();
 
             manifest
                 .DefineStyle("TheHeadlessTheme-bootstrap-oc")
                 .SetUrl("~/TheHeadlessTheme/css/bootstrap-oc.min.css", "~/TheHeadlessTheme/css/bootstrap-oc.css")
                 .SetVersion("1.0.0");
-				
+        }
+
+        public void Configure(ResourceManagementOptions options)
+        {
+            options.ResourceManifests.Add(manifest);
         }
     }
 }

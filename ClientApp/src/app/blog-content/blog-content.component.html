@@ -31,7 +31,7 @@
             <ng-container *ngFor="let blog of (blogPost | async)?.blogPost">
                 <figure style="cursor: pointer;"  class="image">
   
-                    <img class="image" *ngIf="blog.image.urls" src="https://localhost:5001{{blog.image.urls}}"
+                    <img class="image" *ngIf="blog.image.urls" src="http://localhost:5000{{blog.image.urls}}"
                       alt="Placeholder image">
               
                   </figure>
